@@ -110,6 +110,7 @@
             this.buttonWriteFile.TabIndex = 5;
             this.buttonWriteFile.Text = "Write";
             this.buttonWriteFile.UseVisualStyleBackColor = false;
+            this.buttonWriteFile.Click += new System.EventHandler(this.buttonWriteFile_Click);
             // 
             // buttonExit
             // 
