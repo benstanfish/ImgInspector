@@ -46,7 +46,10 @@ namespace ImgInspector
                 for (int i = 0; i < checkedListBoxImages.Items.Count; i++)
                 {
                     checkedListBoxImages.SetItemChecked(i, true);
+                    
                 }
+
+        
             }
 
         }
@@ -86,7 +89,7 @@ namespace ImgInspector
         private void writeFiles()
         {
             var images = new List<MyImageData>();
-
+                
             foreach (String image in checkedListBoxImages.CheckedItems)
             {
                 System.Drawing.Image img = System.Drawing.Image.FromFile(image);
@@ -94,7 +97,9 @@ namespace ImgInspector
                 images.Add(mid);
             }
 
-            string filePath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "\\XML_" + DateTime.Now.ToString("yyyyMMddhhmmss") + ".xml";
+
+
+            string filePath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "\\ImageSizeLog" + DateTime.Now .ToString("yyyyMMddhhmmss") + ".xml";
 
             XmlSerializer formatter = new XmlSerializer(typeof(MyImageData));
             TextWriter writer = new StreamWriter(filePath);
@@ -110,8 +115,8 @@ namespace ImgInspector
         // [Serializable]
         public class MyImageData
         {
-            [XmlAttribute]
-            public string ID { get; set; }
+           // [XmlAttribute]
+          //  public string ID { get; set; }
             [XmlElement]
             public string imagePath { get; set; }
             public double width { get; set; }
@@ -124,7 +129,7 @@ namespace ImgInspector
 
             public MyImageData(string Path, double Width, double Height)
             {
-                this.ID = Path;
+               //this.ID = Path;
                 this.imagePath = Path;
                 this.width = Width;
                 this.height = Height;
@@ -156,5 +161,8 @@ namespace ImgInspector
         {
             writeFiles();
         }
+
+  
+
     }
 }
