@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml.Serialization;
 using System.IO;
+using System.Diagnostics;
 
 namespace ImgInspector
 {
@@ -48,8 +49,7 @@ namespace ImgInspector
                     checkedListBoxImages.SetItemChecked(i, true);
                     
                 }
-
-        
+                checkedListBoxImages.SetSelected(0, true);
             }
 
         }
@@ -86,7 +86,48 @@ namespace ImgInspector
         }
 
 
-        private void writeFiles()
+        private void WriteCSV(string FilePath)
+        {
+            string filePath;
+            
+            if (FilePath == "")
+            {
+                filePath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "\\ImageSizeLog" + DateTime.Now.ToString("yyyyMMddhhmmss") + ".csv";
+            }
+            else
+            {
+                filePath = FilePath + "\\ImageSizeLog" + DateTime.Now.ToString("yyyyMMddhhmmss") + ".csv";
+            }
+
+            using (StreamWriter writer = new StreamWriter(filePath))
+            {
+                foreach (String image in checkedListBoxImages.CheckedItems)
+                {
+                    System.Drawing.Image img = System.Drawing.Image.FromFile(image);
+                    string line =
+                        Path.GetFullPath(image) + ", " +
+                        Path.GetFileName(image).Trim() + ", " +
+                        img.Width + ", " +
+                        img.Height + ", " +
+                        Math.Round(Convert.ToDouble(img.Width) / Convert.ToDouble(img.Height), 5);
+                    writer.WriteLine(line);
+                }
+                writer.Close();
+            }
+
+            MessageBox.Show("Completed!");
+
+        }
+
+        private void OpenFolder(string filePath)
+        {
+            if (File.Exists(filePath))
+            {
+                Process.Start("explorer.exe", filePath);
+            }
+        }
+
+        private void writeFiles(string FilePath)
         {
             var images = new List<MyImageData>();
                 
@@ -97,9 +138,16 @@ namespace ImgInspector
                 images.Add(mid);
             }
 
-
-
-            string filePath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "\\ImageSizeLog" + DateTime.Now .ToString("yyyyMMddhhmmss") + ".xml";
+            string filePath;
+            if (FilePath == "")
+            {
+                filePath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "\\ImageSizeLog" + DateTime.Now.ToString("yyyyMMddhhmmss") + ".xml";
+            }
+            else
+            {
+                filePath = FilePath + "\\ImageSizeLog" + DateTime.Now.ToString("yyyyMMddhhmmss") + ".xml";
+            }
+            
 
             XmlSerializer formatter = new XmlSerializer(typeof(MyImageData));
             TextWriter writer = new StreamWriter(filePath);
@@ -159,10 +207,44 @@ namespace ImgInspector
 
         private void buttonWriteFile_Click(object sender, EventArgs e)
         {
-            writeFiles();
-        }
+            //writeFiles();
+
+            if (textBoxLogPath.Text != "")
+            {
+                WriteCSV(textBoxLogPath.Text);
+            }
+            else
+            {
+                MessageBox.Show("Please select a log save location.");
+            }
 
   
+        }
 
+        private void buttonFileLoc_Click(object sender, EventArgs e)
+        {
+
+                if (textBoxLogPath.Text != "")
+                {
+                    Process.Start(textBoxLogPath.Text + @"\");
+                }
+                
+
+        }
+
+        private void buttonLogPath_Click(object sender, EventArgs e)
+        {
+            FolderBrowserDialog fbd = new FolderBrowserDialog();
+
+            if (fbd.ShowDialog() == DialogResult.OK)
+            {
+                textBoxLogPath.Text = fbd.SelectedPath;
+            }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            ReturnText();
+        }
     }
 }

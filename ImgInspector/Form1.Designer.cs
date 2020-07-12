@@ -37,6 +37,10 @@
             this.buttonExit = new System.Windows.Forms.Button();
             this.labelList = new System.Windows.Forms.Label();
             this.labelPreview = new System.Windows.Forms.Label();
+            this.buttonFileLoc = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
+            this.textBoxLogPath = new System.Windows.Forms.TextBox();
+            this.buttonLogPath = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPreview)).BeginInit();
             this.SuspendLayout();
             // 
@@ -50,7 +54,7 @@
             this.checkedListBoxImages.FormattingEnabled = true;
             this.checkedListBoxImages.Location = new System.Drawing.Point(129, 30);
             this.checkedListBoxImages.Name = "checkedListBoxImages";
-            this.checkedListBoxImages.Size = new System.Drawing.Size(901, 410);
+            this.checkedListBoxImages.Size = new System.Drawing.Size(901, 563);
             this.checkedListBoxImages.TabIndex = 0;
             this.checkedListBoxImages.SelectedIndexChanged += new System.EventHandler(this.checkedListBoxImages_SelectedIndexChanged);
             // 
@@ -59,7 +63,7 @@
             this.buttonOpen.BackColor = System.Drawing.Color.PaleTurquoise;
             this.buttonOpen.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonOpen.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.buttonOpen.Location = new System.Drawing.Point(12, 29);
+            this.buttonOpen.Location = new System.Drawing.Point(12, 30);
             this.buttonOpen.Name = "buttonOpen";
             this.buttonOpen.Size = new System.Drawing.Size(110, 30);
             this.buttonOpen.TabIndex = 1;
@@ -70,7 +74,7 @@
             // buttonSelectAll
             // 
             this.buttonSelectAll.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonSelectAll.Location = new System.Drawing.Point(13, 96);
+            this.buttonSelectAll.Location = new System.Drawing.Point(12, 97);
             this.buttonSelectAll.Name = "buttonSelectAll";
             this.buttonSelectAll.Size = new System.Drawing.Size(110, 30);
             this.buttonSelectAll.TabIndex = 2;
@@ -81,7 +85,7 @@
             // buttonSelectNone
             // 
             this.buttonSelectNone.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonSelectNone.Location = new System.Drawing.Point(13, 132);
+            this.buttonSelectNone.Location = new System.Drawing.Point(12, 133);
             this.buttonSelectNone.Name = "buttonSelectNone";
             this.buttonSelectNone.Size = new System.Drawing.Size(110, 30);
             this.buttonSelectNone.TabIndex = 3;
@@ -104,7 +108,7 @@
             this.buttonWriteFile.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonWriteFile.BackColor = System.Drawing.Color.LightGreen;
             this.buttonWriteFile.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonWriteFile.Location = new System.Drawing.Point(13, 373);
+            this.buttonWriteFile.Location = new System.Drawing.Point(1126, 507);
             this.buttonWriteFile.Name = "buttonWriteFile";
             this.buttonWriteFile.Size = new System.Drawing.Size(110, 30);
             this.buttonWriteFile.TabIndex = 5;
@@ -114,10 +118,10 @@
             // 
             // buttonExit
             // 
-            this.buttonExit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.buttonExit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonExit.BackColor = System.Drawing.Color.LightSalmon;
             this.buttonExit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonExit.Location = new System.Drawing.Point(13, 409);
+            this.buttonExit.Location = new System.Drawing.Point(1126, 624);
             this.buttonExit.Name = "buttonExit";
             this.buttonExit.Size = new System.Drawing.Size(110, 30);
             this.buttonExit.TabIndex = 6;
@@ -144,11 +148,59 @@
             this.labelPreview.TabIndex = 8;
             this.labelPreview.Text = "Image Preview";
             // 
+            // buttonFileLoc
+            // 
+            this.buttonFileLoc.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonFileLoc.Location = new System.Drawing.Point(1126, 543);
+            this.buttonFileLoc.Name = "buttonFileLoc";
+            this.buttonFileLoc.Size = new System.Drawing.Size(110, 30);
+            this.buttonFileLoc.TabIndex = 9;
+            this.buttonFileLoc.Text = "Explorer";
+            this.buttonFileLoc.UseVisualStyleBackColor = true;
+            this.buttonFileLoc.Click += new System.EventHandler(this.buttonFileLoc_Click);
+            // 
+            // label1
+            // 
+            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(126, 613);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(65, 17);
+            this.label1.TabIndex = 10;
+            this.label1.Text = "Log Path";
+            // 
+            // textBoxLogPath
+            // 
+            this.textBoxLogPath.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBoxLogPath.Location = new System.Drawing.Point(129, 634);
+            this.textBoxLogPath.Name = "textBoxLogPath";
+            this.textBoxLogPath.Size = new System.Drawing.Size(901, 22);
+            this.textBoxLogPath.TabIndex = 11;
+            // 
+            // buttonLogPath
+            // 
+            this.buttonLogPath.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.buttonLogPath.BackColor = System.Drawing.Color.PaleTurquoise;
+            this.buttonLogPath.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonLogPath.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.buttonLogPath.Location = new System.Drawing.Point(13, 630);
+            this.buttonLogPath.Name = "buttonLogPath";
+            this.buttonLogPath.Size = new System.Drawing.Size(110, 30);
+            this.buttonLogPath.TabIndex = 12;
+            this.buttonLogPath.Text = "Save";
+            this.buttonLogPath.UseVisualStyleBackColor = false;
+            this.buttonLogPath.Click += new System.EventHandler(this.buttonLogPath_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1245, 445);
+            this.ClientSize = new System.Drawing.Size(1245, 670);
+            this.Controls.Add(this.buttonLogPath);
+            this.Controls.Add(this.textBoxLogPath);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.buttonFileLoc);
             this.Controls.Add(this.labelPreview);
             this.Controls.Add(this.labelList);
             this.Controls.Add(this.buttonExit);
@@ -162,7 +214,7 @@
             this.MinimizeBox = false;
             this.Name = "Form1";
             this.ShowIcon = false;
-            this.Text = "Image Inspector v0.0";
+            this.Text = "Image Inspector v0.1";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPreview)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -180,6 +232,10 @@
         private System.Windows.Forms.Button buttonExit;
         private System.Windows.Forms.Label labelList;
         private System.Windows.Forms.Label labelPreview;
+        private System.Windows.Forms.Button buttonFileLoc;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TextBox textBoxLogPath;
+        private System.Windows.Forms.Button buttonLogPath;
     }
 }
 
