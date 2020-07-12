@@ -85,70 +85,56 @@ namespace ImgInspector
 
         private void writeFiles()
         {
-            string currentFolder = Path.GetDirectoryName(checkedListBoxImages.CheckedItems.ToString());
-            string logPath = currentFolder + "_" + DateTime.Now.ToString("yyyyMMddhhmmss") + ".txt";
-         
             var images = new List<MyImageData>();
 
-            foreach (string image in checkedListBoxImages.CheckedItems)
+            foreach (String image in checkedListBoxImages.CheckedItems)
             {
-                MyImageData myImageData = new MyImageData();
                 System.Drawing.Image img = System.Drawing.Image.FromFile(image);
-                myImageData.imagePath = Path.GetFullPath(image);
-                myImageData.width = img.Width;
-                myImageData.height = img.Height;
-                images.Add(myImageData);
+                MyImageData mid = new MyImageData(image, img.Width, img.Height);
+                images.Add(mid);
             }
 
-            foreach (MyImageData image in images)
+            string filePath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "\\XML_" + DateTime.Now.ToString("yyyyMMddhhmmss") + ".xml";
+
+            XmlSerializer formatter = new XmlSerializer(typeof(MyImageData));
+            TextWriter writer = new StreamWriter(filePath);
+           
+            foreach (MyImageData myImageData in images)
             {
-                image.SaveObject(logPath);
+                //formatter.Serialize(stream, person);
+                formatter.Serialize(writer, myImageData);
             }
+            writer.Close();
         }
-
-
-        //private void ButtonMakePersons_Click(object sender, EventArgs e)
-        //{
-        //    var persons = new List<Person>();
-        //    foreach (DataGridViewRow row in dataGridView1.Rows)
-        //    {
-
-        //        Person person = new Person();
-        //        persons.Add(person);
-        //    }
-
-        //    string usersDesktop = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-        //    //Stream stream = new FileStream(usersDesktop + "\\Project Serialize\\BIN_" + DateTime.Now.ToString("yyyyMMddhhmmss") + ".txt", FileMode.Create, FileAccess.Write);
-        //    string filePath = usersDesktop + "\\Project Serialize\\XML_" + DateTime.Now.ToString("yyyyMMddhhmmss") + ".txt";
-
-
-        //    // IFormatter formatter = new BinaryFormatter();
-        //    //BinaryFormatter formatter = new BinaryFormatter();
-
-        //    //XmlSerializer formatter = new XmlSerializer(typeof(Person));
-
-        //    foreach (Person person in persons)
-        //    {
-        //        //formatter.Serialize(stream, person);
-        //        person.Save(filePath);
-        //    }
-        //    //stream.Close();
-        //}
-
 
         // [Serializable]
         public class MyImageData
         {
             [XmlAttribute]
-            public string imagePath { get; set; }
+            public string ID { get; set; }
             [XmlElement]
-            public int width { get; set; }
-            public int height { get; set; }
+            public string imagePath { get; set; }
+            public double width { get; set; }
+            public double height { get; set; }
             public double aspectRatio { get; set; }
 
-            public void SaveObject(string fileName)
+            private MyImageData()
             {
-                using (FileStream stream = new FileStream(fileName, FileMode.Append))
+            }
+
+            public MyImageData(string Path, double Width, double Height)
+            {
+                this.ID = Path;
+                this.imagePath = Path;
+                this.width = Width;
+                this.height = Height;
+                int digits = 5;
+                this.aspectRatio = Math.Round(Width / Height, digits);
+            }
+
+            public void Save(string fileName)
+            {
+                using (FileStream stream = new FileStream(fileName, FileMode.Create, FileAccess.Write))
                 {
                     XmlSerializer xml = new XmlSerializer(typeof(MyImageData));
                     xml.Serialize(stream, this);

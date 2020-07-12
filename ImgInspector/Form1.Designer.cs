@@ -104,9 +104,9 @@
             this.buttonWriteFile.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonWriteFile.BackColor = System.Drawing.Color.LightGreen;
             this.buttonWriteFile.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonWriteFile.Location = new System.Drawing.Point(1037, 409);
+            this.buttonWriteFile.Location = new System.Drawing.Point(13, 373);
             this.buttonWriteFile.Name = "buttonWriteFile";
-            this.buttonWriteFile.Size = new System.Drawing.Size(196, 30);
+            this.buttonWriteFile.Size = new System.Drawing.Size(110, 30);
             this.buttonWriteFile.TabIndex = 5;
             this.buttonWriteFile.Text = "Write";
             this.buttonWriteFile.UseVisualStyleBackColor = false;
