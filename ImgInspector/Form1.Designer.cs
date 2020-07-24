@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.checkedListBoxImages = new System.Windows.Forms.CheckedListBox();
             this.buttonOpen = new System.Windows.Forms.Button();
             this.buttonSelectAll = new System.Windows.Forms.Button();
@@ -210,10 +211,10 @@
             this.Controls.Add(this.buttonSelectAll);
             this.Controls.Add(this.buttonOpen);
             this.Controls.Add(this.checkedListBoxImages);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "Form1";
-            this.ShowIcon = false;
             this.Text = "Image Inspector v0.1";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPreview)).EndInit();
             this.ResumeLayout(false);
