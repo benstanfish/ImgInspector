@@ -10,6 +10,10 @@ using System.Windows.Forms;
 using System.Xml.Serialization;
 using System.IO;
 using System.Diagnostics;
+using Syncfusion.Pdf.Parsing;
+using System.Drawing;
+using System.Drawing.Imaging;
+
 
 namespace ImgInspector
 {
@@ -36,7 +40,7 @@ namespace ImgInspector
             ClearAll();
 
             OpenFileDialog openFileDialog1 = new OpenFileDialog();
-            openFileDialog1.Filter = "Image files (*.jpg, *.jpeg, *.gif, *.png, *.svg, *.bmp, *.tiff)|*.jpg; *.jpeg; *.gif; *.png; *.svg; *.bmp; *.tiff;)";
+            openFileDialog1.Filter = "Image files (*.pdf, *.jpg, *.jpeg, *.gif, *.png, *.svg, *.bmp, *.tiff)|*.pdf; *.jpg; *.jpeg; *.gif; *.png; *.svg; *.bmp; *.tiff;)";
             openFileDialog1.FilterIndex = 0;
             openFileDialog1.RestoreDirectory = true;
             openFileDialog1.Multiselect = true;
@@ -82,7 +86,16 @@ namespace ImgInspector
 
         private void checkedListBoxImages_SelectedIndexChanged(object sender, EventArgs e)
         {
-            pictureBoxPreview.Image = Image.FromFile(checkedListBoxImages.SelectedItem.ToString());
+            pictureBoxPreview.Image = null;
+            try
+            {
+                pictureBoxPreview.Image = Image.FromFile(checkedListBoxImages.SelectedItem.ToString());
+            }
+            catch
+            {
+                // No result
+            }
+            
         }
 
 
@@ -245,6 +258,49 @@ namespace ImgInspector
         private void button1_Click(object sender, EventArgs e)
         {
             // ReturnText();
+        }
+
+
+        private void PDFtoJPG(string filePath, int saveType = 0)
+        {
+            // saveType of 1 = png, all other cases are jpg.
+
+            PdfLoadedDocument loadedDocument = new PdfLoadedDocument(filePath);
+            string _baseName = Path.GetFileNameWithoutExtension(filePath);
+            string _parentFolder = Path.GetDirectoryName(filePath);
+            int count = loadedDocument.Pages.Count;
+            for (int i = 0; i < count; i++)
+            {
+                Image image = loadedDocument.ExportAsImage(i);
+                if (saveType == 1)
+                {
+                    image.Save(_parentFolder + "\\" + _baseName + " " + i + ".png", System.Drawing.Imaging.ImageFormat.Png);
+                }
+                else
+                {
+                    image.Save(_parentFolder + "\\" + _baseName + " " + i + ".jpg", System.Drawing.Imaging.ImageFormat.Jpeg);
+                }
+                
+            }
+            loadedDocument.Close(true);
+        }
+
+
+
+        private void buttonPDFtoJPG_Click(object sender, EventArgs e)
+        {
+
+            try
+            {
+                string filePath = checkedListBoxImages.SelectedItem.ToString();
+                PDFtoJPG(filePath);
+                MessageBox.Show("Task Completed", "Task Completed");
+            }
+            catch
+            {
+
+            }
+            
         }
     }
 }

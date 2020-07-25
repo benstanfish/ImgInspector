@@ -42,6 +42,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.textBoxLogPath = new System.Windows.Forms.TextBox();
             this.buttonLogPath = new System.Windows.Forms.Button();
+            this.buttonPDFtoJPG = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPreview)).BeginInit();
             this.SuspendLayout();
             // 
@@ -193,11 +194,25 @@
             this.buttonLogPath.UseVisualStyleBackColor = false;
             this.buttonLogPath.Click += new System.EventHandler(this.buttonLogPath_Click);
             // 
+            // buttonPDFtoJPG
+            // 
+            this.buttonPDFtoJPG.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonPDFtoJPG.BackColor = System.Drawing.Color.LightGreen;
+            this.buttonPDFtoJPG.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonPDFtoJPG.Location = new System.Drawing.Point(1126, 471);
+            this.buttonPDFtoJPG.Name = "buttonPDFtoJPG";
+            this.buttonPDFtoJPG.Size = new System.Drawing.Size(110, 30);
+            this.buttonPDFtoJPG.TabIndex = 13;
+            this.buttonPDFtoJPG.Text = "PDF > JPG";
+            this.buttonPDFtoJPG.UseVisualStyleBackColor = false;
+            this.buttonPDFtoJPG.Click += new System.EventHandler(this.buttonPDFtoJPG_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1245, 670);
+            this.Controls.Add(this.buttonPDFtoJPG);
             this.Controls.Add(this.buttonLogPath);
             this.Controls.Add(this.textBoxLogPath);
             this.Controls.Add(this.label1);
@@ -237,6 +252,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox textBoxLogPath;
         private System.Windows.Forms.Button buttonLogPath;
+        private System.Windows.Forms.Button buttonPDFtoJPG;
     }
 }
 
